@@ -2,11 +2,10 @@ package main
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFibo(t *testing.T) {
-	result := Fibo(5)
-	if result != 5 {
-		t.Errorf("Fib(5) failed, expected %d but got %d", 5, result)
-	}
+	assert.Equal(t, 4, Fibo(5), "Fibo assert err")
 }
