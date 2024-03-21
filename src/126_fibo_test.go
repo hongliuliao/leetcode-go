@@ -7,5 +7,5 @@ import (
 )
 
 func TestFibo(t *testing.T) {
-	assert.Equal(t, 4, Fibo(5), "Fibo assert err")
+	assert.Equal(t, 5, Fibo(5), "Fibo assert err")
 }
