@@ -1,4 +1,4 @@
-package main
+package tree
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// go.exe test -timeout 30s -run ^TestPreOrderTraverse$ github.com/leetcode-go/src
+// go.exe test -timeout 30s -run ^TestPreOrderTraverse$ github.com/leetcode-go/src/tree --count=1 -v
 func TestPreOrderTraverse(t *testing.T) {
 	tree := CreateTree(1, 2, 3, 4, 5)
 	ret := PreOrderTraverse(tree)

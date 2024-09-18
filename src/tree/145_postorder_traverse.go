@@ -1,11 +1,16 @@
-package main
+package tree
 
-import "fmt"
+import (
+	"fmt"
 
-func PreOrderTraverse(root *TreeNode) []int {
+	"github.com/leetcode-go/src/stack"
+)
+
+func PostOrderTraverse(root *TreeNode) []int {
 	result := make([]int, 0)
-	stack := Stack{}
+	stack := stack.Stack{}
 	stack.Push(root)
+	isFirst := true
 	for stack.Peek() != nil {
 		element, err := stack.Pop()
 		if err != nil {
@@ -14,6 +19,11 @@ func PreOrderTraverse(root *TreeNode) []int {
 		}
 		treeNode := element.(*TreeNode)
 		result = append(result, treeNode.Val)
+		if isFirst {
+			stack.Push(element)
+			isFirst = false
+		}
+
 		if treeNode.Right != nil {
 			stack.Push(treeNode.Right)
 		}
