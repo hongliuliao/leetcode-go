@@ -6,11 +6,21 @@ import (
 	"github.com/leetcode-go/src/stack"
 )
 
+func Push(stack *stack.Stack, element *TreeNode) {
+	stack.Push(element)
+	fmt.Printf("put element to stack:%v\n", element.Val)
+}
+
 func PostOrderTraverse(root *TreeNode) []int {
 	result := make([]int, 0)
 	stack := stack.Stack{}
-	stack.Push(root)
-	isFirst := true
+	Push(&stack, root)
+	leftNode := root.Left
+	for leftNode != nil {
+		Push(&stack, leftNode)
+		leftNode = leftNode.Left
+	}
+	lastVistNode := root
 	for stack.Peek() != nil {
 		element, err := stack.Pop()
 		if err != nil {
@@ -18,18 +28,21 @@ func PostOrderTraverse(root *TreeNode) []int {
 			continue
 		}
 		treeNode := element.(*TreeNode)
-		result = append(result, treeNode.Val)
-		if isFirst {
-			stack.Push(element)
-			isFirst = false
+		fmt.Printf("pop element:%v\n", treeNode.Val)
+
+		if treeNode.Right != lastVistNode && treeNode.Right != nil {
+			Push(&stack, treeNode)
+			Push(&stack, treeNode.Right)
+			leftNode := treeNode.Right.Left
+			for leftNode != nil {
+				Push(&stack, leftNode)
+				leftNode = treeNode.Left
+			}
+		} else {
+			lastVistNode = treeNode
+			result = append(result, treeNode.Val)
 		}
 
-		if treeNode.Right != nil {
-			stack.Push(treeNode.Right)
-		}
-		if treeNode.Left != nil {
-			stack.Push(treeNode.Left)
-		}
 	}
 	return result
 }
