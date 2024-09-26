@@ -22,16 +22,11 @@ func PostOrderTraverse(root *TreeNode) []int {
 	}
 	lastVistNode := root
 	for stack.Peek() != nil {
-		element, err := stack.Pop()
-		if err != nil {
-			fmt.Printf("pop element err:%v\n", err)
-			continue
-		}
+		element := stack.Peek()
 		treeNode := element.(*TreeNode)
 		fmt.Printf("pop element:%v\n", treeNode.Val)
 
 		if treeNode.Right != lastVistNode && treeNode.Right != nil {
-			Push(&stack, treeNode)
 			Push(&stack, treeNode.Right)
 			leftNode := treeNode.Right.Left
 			for leftNode != nil {
@@ -39,6 +34,13 @@ func PostOrderTraverse(root *TreeNode) []int {
 				leftNode = treeNode.Left
 			}
 		} else {
+			element, err := stack.Pop()
+			if err != nil {
+				fmt.Printf("pop element err:%v\n", err)
+				continue
+			}
+			treeNode := element.(*TreeNode)
+			fmt.Printf("pop element:%v\n", treeNode.Val)
 			lastVistNode = treeNode
 			result = append(result, treeNode.Val)
 		}

@@ -15,4 +15,6 @@ func TestPostOrderTraverse(t *testing.T) {
 		fmt.Println(val)
 	}
 	require.NotNil(t, ret)
+	expect_val := []int{4, 5, 2, 3, 1}
+	require.Equal(t, expect_val, ret)
 }
