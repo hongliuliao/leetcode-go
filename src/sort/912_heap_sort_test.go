@@ -13,7 +13,13 @@ func TestSwap(t *testing.T) {
 }
 
 func TestBuildHeap(t *testing.T) {
-	arr := []int{1, 2, 3}
+	arr := []int{3, 1, 2}
 	BuildHeap(arr)
-	require.Equal(t, []int{3, 2, 1}, arr)
+	require.Equal(t, []int{3, 1, 2}, arr)
+}
+
+func TestHeapSort(t *testing.T) {
+	arr := []int{4, 5, 3, 1, 2}
+	HeapSort(arr)
+	require.Equal(t, []int{1, 2, 3, 4, 5}, arr)
 }
